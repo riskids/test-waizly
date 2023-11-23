@@ -4,9 +4,9 @@
 open your terminal, go to the directory that you will install this project, then run the following command:
 
 ```bash
-git clone http://demo.te.net.id:8001/yayong/base-laravel.git
+git clone https://github.com/riskids/test-waizly.git
 
-cd base-laravel 
+cd backend(1)
 ```
 
 ### Install packages
