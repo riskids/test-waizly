@@ -1,0 +1,49 @@
+# Stage 1: Build Laravel Application
+FROM composer AS build
+WORKDIR /app
+COPY . .
+RUN composer install --ignore-platform-reqs --no-scripts
+
+# Stage 2: Create Runtime Image
+FROM php:8.2-fpm
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    libpng-dev \
+    libonig-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Swoole
+RUN pecl install swoole && docker-php-ext-enable swoole
+
+# Copy Laravel application files
+COPY --from=build /app /var/www/html
+
+# Set the working directory
+WORKDIR /var/www/html
+
+# Copy environment file
+COPY .env.example .env
+
+# Generate application key
+RUN php artisan key:generate
+RUN php artisan optimize
+RUN php artisan config:clear
+# RUN php artisan migrate --seed --force
+
+# Run Octane install with options
+RUN echo "1" | php artisan octane:install
+
+# Set file permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage
+
+# Expose port 80
+EXPOSE 80
+
+# Start the Laravel development server with Octane
+CMD ["php", "artisan", "config:clear"]
+CMD ["php", "artisan", "octane:start", "--host=0.0.0.0", "--port=80"]
