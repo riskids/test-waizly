@@ -37,7 +37,7 @@ php artisan serve
 ```
 
 ### Documentation API
-[(Click Here for POSTMAN API Documentation)]([http://apimatic.io](https://documenter.getpostman.com/view/30206632/2s9YeBfEc5))
+[(Click Here for POSTMAN API Documentation)](https://documenter.getpostman.com/view/30206632/2s9YeBfEc5)
 
 
 
