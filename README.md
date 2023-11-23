@@ -1,15 +1,7 @@
 ## Install Backend (1)
 
-### Clone Repository
-open your terminal, go to the directory that you will install this project, then run the following command:
-
-```bash
-git clone https://github.com/riskids/test-waizly.git
-
-cd backend(1)
-```
-
 ### Install packages
+Clone the project into local open your terminal,
 Install vendor using composer
 
 ```bash
