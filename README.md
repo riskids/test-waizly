@@ -62,5 +62,5 @@ npm start
 
 The Application Runs on **localhost:3000**
 
-- <img src="ss.png" width="300"/>
+- <img src="ss-fe.png" width="300"/>
 
